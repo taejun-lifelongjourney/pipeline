@@ -1,5 +1,4 @@
 from multiprocessing import Value
-from multiprocessing import Lock
 
 
 class AtomicCounter(object):
