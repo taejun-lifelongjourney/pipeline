@@ -23,4 +23,8 @@ aggerator streams [[0,1], [2,3], [4,5], [6,7]] into the next pipe(summation)
 summation streams 1, 5, 9, 13 into the next pipe(nth_triangular)
 nth_triangular streams 1, 15, 45, 91 out
 
-You can throttle using buffer_size of each pipe's consumer and number_of_consumer
+You can throttle using buffer_size of each pipe's consumer and number_of_consumer.
+And also data generator can be one of below 
+    - any DataGenerator class implementor
+    - collections.Iterables
+    - any user-defined generator function
