@@ -18,10 +18,10 @@ pipeline = Pipeline().add(
 
 """
 Explanation
-range(8) strems [0,1,2,3,4,6,7] into the pipeline
+range(8) streams [0,1,2,3,4,6,7] into the pipeline
 aggerator streams [[0,1], [2,3], [4,5], [6,7]] into the next pipe(summation)
 summation streams 1, 5, 9, 13 into the next pipe(nth_triangular)
-nth_triangular streams 1, 15, 45, 91 out
+nth_triangular streams out 1, 15, 45, 91 for each input
 """
 ```  
 
