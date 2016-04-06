@@ -6,7 +6,7 @@ from pipeline import Pipeline, PipeBuilder
 
 
 class TestPipeline(unittest.TestCase):
-    def test_normal(self):
+    def test_one_pipe(self):
         pipeline = Pipeline().add(
             PipeBuilder().alias("multiplier").consumer(lambda m: m * m).buffer_size(100).number_of_consumer(10)
         )
@@ -15,6 +15,18 @@ class TestPipeline(unittest.TestCase):
         actual = [x for x in pipeline.stream(range(10))]
         actual.sort()
         self.assertEquals(expected, actual)
+
+    def test_multiple_pipes(self):
+        pipeline = Pipeline().add(
+            PipeBuilder("aggregator").aggregation_size(2).buffer_size(10)
+        ).add(
+            PipeBuilder("summation").consumer(lambda aggr: sum(aggr)).number_of_consumer(1).buffer_size(10)
+        ).add(
+            PipeBuilder("nth_triangular").consumer(lambda n: (n * n + n) / 2).number_of_consumer(1).buffer_size(10)
+        )
+
+        expect = [1, 15, 45, 91]
+        self.assertEquals(expect, [x for x in pipeline.stream(range(8))])
 
     def test_when_consumer_yield_none(self):
         pipeline = Pipeline().add(
@@ -35,15 +47,15 @@ class TestPipeline(unittest.TestCase):
         self.assertRaises(Exception, test)
 
     def test_run_multiple_times(self):
-        pipeline = Pipeline()
-        pipeline.add(
+        pipeline = Pipeline().add(
             PipeBuilder("aggregator").aggregation_size(2).buffer_size(1)
         ).add(
             PipeBuilder("summation").consumer(lambda arr: sum(arr)).number_of_consumer(3).buffer_size(1)
         ).add(
             PipeBuilder("nth_triangular").consumer(lambda n: reduce(lambda n1, n2: n1 + n2, range(1, n), 1)).number_of_consumer(5).buffer_size(1)
         ).add(
-            PipeBuilder("nth_triangular2").consumer(lambda n: reduce(lambda n1, n2: n1 + n2, range(1, n), 1)).number_of_consumer(5).buffer_size(1))
+            PipeBuilder("nth_triangular2").consumer(lambda n: reduce(lambda n1, n2: n1 + n2, range(1, n), 1)).number_of_consumer(5).buffer_size(
+                1))
 
         expect = [1, 56, 407, 667, 3082]
         actual_results = []
