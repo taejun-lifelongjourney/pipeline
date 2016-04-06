@@ -10,7 +10,7 @@ pipeline = Pipeline().add(
 ).add(
     PipeBuilder("summation").consumer(lambda arr: sum(arr)).number_of_consumer(3).buffer_size(1)
 ).add(
-    PipeBuilder("nth_triangular").consumer(lambda n: (n * n + n) / 2).number_of_consumer(5).buffer_size(1)
+    PipeBuilder("triangular").consumer(lambda n: (n * n + n) / 2).number_of_consumer(5).buffer_size(1)
 )
 
 #pours data into pipelilne using generator
@@ -21,7 +21,7 @@ Explanation
 range(8) streams [0,1,2,3,4,6,7] into the pipeline
 aggerator streams [[0,1], [2,3], [4,5], [6,7]] into the next pipe(summation)
 summation streams 1, 5, 9, 13 into the next pipe(nth_triangular)
-nth_triangular streams out 1, 15, 45, 91 for each input
+triangular streams out 1, 15, 45, 91 for each input
 """
 ```  
 
