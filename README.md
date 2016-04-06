@@ -25,7 +25,7 @@ nth_triangular streams 1, 15, 45, 91 out
 """
 ```  
 
-You can also throttle using buffer_size of each pipe's consumer and number_of_consumer.
+You can also throttle streams(data) using buffer_size of each pipe's consumer and number_of_consumer.
 
 Data generator for pipeline can be one of below :
 
