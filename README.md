@@ -25,6 +25,6 @@ nth_triangular streams 1, 15, 45, 91 out
 
 You can throttle using buffer_size of each pipe's consumer and number_of_consumer.
 And also data generator can be one of below :
-    * any DataGenerator class implementor
-    * collections.Iterables
-    * any user-defined generator function
+    *any DataGenerator class implementor
+    *collections.Iterables
+    *any user-defined generator function
