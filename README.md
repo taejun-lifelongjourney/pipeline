@@ -13,7 +13,7 @@ pipeline = Pipeline().add(
     PipeBuilder("nth_triangular").consumer(lambda n: (n * n + n) / 2).number_of_consumer(5).buffer_size(1))
 
 //pours data into pipelilne using generator
-[1, 28, 45, 91] == [for x in pipeline.stream(range(8))]
+[1, 15, 45, 91] == [for x in pipeline.stream(range(8))]
 
 ```  
 #Explanation
