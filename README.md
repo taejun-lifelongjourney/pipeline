@@ -3,30 +3,27 @@ A yet another tiny python library for chaining unit of work(job) and supporting 
 
 # Usage
 ```python
+
+  //initialize pipeline with 5 pipes
   pipeline = Pipeline().add(
       PipeBuilder("aggregator").aggregation_size(2).buffer_size(1)
   ).add(
       PipeBuilder("summation").consumer(lambda arr: sum(arr)).number_of_consumer(3).buffer_size(1)
   ).add(
-      PipeBuilder("nth_triangular").consumer(lambda n: reduce(lambda n1, n2: n1 + n2, range(1, n), 1)).number_of_consumer(5).buffer_size(1)
-  ).add(
-      PipeBuilder("nth_triangular2").consumer(lambda n: reduce(lambda n1, n2: n1 + n2, range(1, n), 1)).number_of_consumer(5).buffer_size(1))
+      PipeBuilder("nth_triangular").consumer(lambda n: (n * n + n) / 2).number_of_consumer(5).buffer_size(1))
 
-  expect = [1, 56, 407, 667, 3082]
-  actual_results = []
-
-  def do_test(i):
-      actual = [x for x in pipeline.stream(range(9))]
-      actual.sort()
-      actual_results.append(actual)
-      self.assertEquals(actual, expect, "%s th test. actual(%s) != expected(%s)" % (i, actual, expect))
-      pipeline.reset()
-      pipeline.logger.info("%sth test done", i)
-
-  map(do_test, range(100))
-
-  self.assertEquals(actual_results, map(lambda ignore: expect, range(100)))
-  self.assertTrue(True)
+  //pours data into pipelilne using generator
+  [1, 28, 45, 91] == [for x in pipeline.stream(range(8))]
+  
+  
+"""
+Explanation
+range(8) strems [0,1,2,3,4,6,7] into the pipeline
+aggerator streams [[0,1], [2,3], [4,5], [6,7]] into the next pipe(summation)
+summation streams 1, 5, 9, 13 into the next pipe(nth_triangular)
+nth_triangular streams 1, 15, 45, 91 out
+"""
+    
 ```
 
 # Dependendies
