@@ -4,7 +4,7 @@ A yet another tiny python library for pipelining sequantial data processing step
 # Usage
 ```python
 
-//initialize pipeline with 3 pipes
+#initialize pipeline with 3 pipes
 pipeline = Pipeline().add(
     PipeBuilder("aggregator").aggregation_size(2).buffer_size(1)
 ).add(
@@ -13,7 +13,7 @@ pipeline = Pipeline().add(
     PipeBuilder("nth_triangular").consumer(lambda n: (n * n + n) / 2).number_of_consumer(5).buffer_size(1)
 )
 
-//pours data into pipelilne using generator
+#pours data into pipelilne using generator
 [1, 15, 45, 91] == [for x in pipeline.stream(range(8))]
 
 """
