@@ -1,5 +1,5 @@
 # Pipeline
-A yet another tiny python library for pipelining sequantial data processing steps and running in parallel way with multiple processes
+A yet another tiny python library for pipelining sequantial data processing steps and running them in parallel way with multiple processes
 
 # Usage
 ```python
