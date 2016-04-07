@@ -27,12 +27,12 @@ triangular streams out 1, 15, 45, 91 for each input
 
 You can also throttle streams(data) using buffer_size of each pipe's consumer and number_of_consumer.
 
-Data generator for pipeline can be one of below :
+Data generator for pipeline can be one of belows :
 
 * any built-in DataGenerator class implementors
 * collections.Iterables
 * any user-defined generator function
 
-Also each consumer can be one of below :
+Also each consumer can be one of belows :
 * any lamda function that receive one argument
 * any built-in Consumer class implementors
