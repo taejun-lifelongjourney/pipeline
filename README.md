@@ -29,6 +29,6 @@ You can also throttle streams(data) using buffer_size of each pipe's consumer an
 
 Data generator for pipeline can be one of below :
 
-* any DataGenerator class implementor
+* any DataGenerator class implementors
 * collections.Iterables
 * any user-defined generator function
